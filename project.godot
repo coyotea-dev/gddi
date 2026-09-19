@@ -1,0 +1,44 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="GDDI"
+config/description="GDDI (Godot Dependency Injection) is a stupidly simple lightweight service locator and dependency injection framework for Godot Engine.
+Built directly on Godot's built-in Engine singleton system, it lets you easily manage game services, lazy singletons, nodes, and factory instantiations through a clear provide and inject API."
+config/version="1.0.0"
+run/main_scene="uid://c5uak8wul8a8a"
+config/features=PackedStringArray("4.7", "GL Compatibility")
+config/icon="res://icon.svg"
+GDDI/initializers=PackedStringArray("res://test/scripts/my_gddi_init.gd")
+GDDI/verbose=true
+
+[autoload]
+
+GDDI="*uid://csl2tr8m8v7yq"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gddi/plugin.cfg", "res://addons/gut/plugin.cfg")
+
+[physics]
+
+3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
