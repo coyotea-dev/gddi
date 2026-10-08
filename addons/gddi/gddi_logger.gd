@@ -40,10 +40,19 @@ static func error(message: String) -> void:
 
 static func _print_log(level_str: String, message: String, color: String) -> void:
 	var caller: String = _get_caller_info()
+	var timestamp: String = _get_timestamp_with_ms()
+	
+	var text: String
 	if caller.is_empty():
-		print_rich("[color=%s][%s] [%s] [%s]: %s[/color]" % [color, _get_timestamp_with_ms(), level_str, _TAG, message])
+		text = "[%s] [%s] [%s]: %s" % [timestamp, level_str, _TAG, message]
 	else:
-		print_rich("[color=%s][%s] [%s] [%s] (%s): %s[/color]" % [color, _get_timestamp_with_ms(), level_str, _TAG, caller, message])
+		text = "[%s] [%s] [%s] (%s): %s" % [timestamp, level_str, _TAG, caller, message]
+	var output := "[color=%s]%s[/color]" % [color, text]
+
+	if OS.has_feature("web"):
+		print(text)
+	else:
+		print_rich(output)
 
 static func _get_timestamp_with_ms() -> String:
 	var datetime: Dictionary = Time.get_datetime_dict_from_system()

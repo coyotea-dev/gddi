@@ -42,7 +42,7 @@ func set_log_level(level: GDDILogger.LogLevel) -> void:
 	GDDILogger.current_log_level = level
 	GDDILogger.debug("Log level set to %s." % GDDILogger.LogLevel.keys()[level])
 
-func _enter_tree() -> void:
+func _init() -> void:
 	if ProjectSettings.get_setting(_VERBOSE_SETTING, false):
 		GDDILogger.current_log_level = GDDILogger.LogLevel.DEBUG if OS.has_feature('debug') else GDDILogger.LogLevel.WARNING
 	else:
@@ -52,7 +52,7 @@ func _enter_tree() -> void:
 	GDDILogger.debug("Loading %d configured initializer(s)." % paths.size())
 	for path in paths:
 		GDDILogger.debug("Loading initializer '%s'." % path)
-		if not FileAccess.file_exists(path):
+		if not ResourceLoader.exists(path, "GDScript"):
 			GDDILogger.warn("Initializer '%s' does not exist; skipping it." % path)
 			continue
 		var script: GDScript = ResourceLoader.load(path, "GDScript", ResourceLoader.CACHE_MODE_IGNORE_DEEP)
